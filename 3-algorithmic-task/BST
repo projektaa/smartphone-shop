@@ -25,6 +25,7 @@ class Solution:
         count += self.count_bst_helper(node.right)
         return count
 
+#This method counts valid BSTs in the entire binary tree.
     def count_bst(self, root):
         if not root:
             return 0
