@@ -1,1 +1,34 @@
+# Definition for a binary tree node. / val: The value stored in the node.
+# class TreeNode(object):
+#     def __init__(self, val=0, left=None, right=None):
+#         self.val = val
+#         self.left = left
+#         self.right = right
+
+
+class Solution:
+#This method checks whether a given subtree rooted at node is a valid BST.
+    def is_bst(self, node, min_val, max_val):
+        if not node:
+            return True
+        if node.val <= min_val or node.val >= max_val:
+            return False
+        return self.is_bst(node.left, min_val, node.val) and self.is_bst(node.right, node.val, max_val)
+#This method recursively counts the number of valid BSTs starting from the given node.
+    def count_bst_helper(self, node):
+        if not node:
+            return 0
+        count = 0
+        if self.is_bst(node, float('-inf'), float('inf')):
+            count += 1
+        count += self.count_bst_helper(node.left)
+        count += self.count_bst_helper(node.right)
+        return count
+
+    def count_bst(self, root):
+        if not root:
+            return 0
+        return self.count_bst_helper(root)
+
+
 
